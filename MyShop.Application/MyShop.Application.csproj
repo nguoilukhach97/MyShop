@@ -5,11 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MyShop.Data\MyShop.Data.csproj" />
+    <ProjectReference Include="..\MyShop.Utilities\MyShop.Utilities.csproj" />
   </ItemGroup>
 
 </Project>
