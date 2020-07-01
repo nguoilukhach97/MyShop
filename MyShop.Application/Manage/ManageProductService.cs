@@ -1,7 +1,7 @@
 ﻿using MyShop.Application.DTOs;
 using MyShop.Application.Interfaces;
 using MyShop.Application.PageViews;
-using MyShop.Data.Entities;
+
 using MyShop.Utilities.Exceptions;
 using System;
 using System.Linq;
@@ -9,10 +9,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using MyShop.Data.Entities;
 
 namespace MyShop.Application.Manage
 {
-    public class ManageProductService : IManageProductService
+    public class ManageProductService  : IManageProductService
     {
         private readonly MyShopContext _context;
         public ManageProductService(MyShopContext context)
@@ -31,8 +32,7 @@ namespace MyShop.Application.Manage
                 Details = request.Details,
                 Price = request.Price,
                 PromotionPrice = request.PromotionPrice,
-                Image = request.Image,
-                ImageThumb = request.ImageThumb,
+                
                 Warranty = request.Warranty,
                 Status = request.Status
 
@@ -49,7 +49,7 @@ namespace MyShop.Application.Manage
             return await _context.SaveChangesAsync();
         }
 
-       
+
         public async Task<PageResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request)
         {
             //1. select 
@@ -80,8 +80,7 @@ namespace MyShop.Application.Manage
                     Details = p.a.Details,
                     Price = p.a.Price,
                     PromotionPrice = p.a.PromotionPrice,
-                    Image = p.a.Image,
-                    ImageThumb = p.a.ImageThumb,
+                    
                     Warranty = p.a.Warranty,
                     DateCreated = p.a.DateCreated,
                     UserCreated = p.a.UserCreated,
@@ -120,8 +119,7 @@ namespace MyShop.Application.Manage
             product.Details = request.Details;
             product.Price = request.Price;
             product.PromotionPrice = request.PromotionPrice;
-            product.Image = request.Image;
-            product.ImageThumb = request.ImageThumb;
+           
             product.Warranty = request.Warranty;
             product.Status = request.Status;
 

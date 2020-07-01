@@ -6,6 +6,6 @@ namespace MyShop.Application.PageViews
 {
     public class GetProductPagingView : PagingRequestBase
     {
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace MyShop.Data.Entities
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Evalutes> Evalutes { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<ProductImages> ProductImages { get; set; }
         public virtual DbSet<ProductInCategory> ProductInCategory { get; set; }
         public virtual DbSet<ProductInOrder> ProductInOrder { get; set; }
         public virtual DbSet<ProductSize> ProductSize { get; set; }
@@ -33,7 +34,7 @@ namespace MyShop.Data.Entities
         {
             if (!optionsBuilder.IsConfigured)
             {
-
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Server=.;Database=MyShop;Trusted_Connection=True;");
             }
         }
@@ -105,6 +106,28 @@ namespace MyShop.Data.Entities
                 entity.Property(e => e.ReasonCancelation).HasColumnType("ntext");
             });
 
+            modelBuilder.Entity<ProductImages>(entity =>
+            {
+                entity.Property(e => e.Caption).HasMaxLength(250);
+
+                entity.Property(e => e.DateCreated).HasColumnType("datetime");
+
+                entity.Property(e => e.ImagePath)
+                    .IsRequired()
+                    .HasMaxLength(250)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IsDefault).HasDefaultValueSql("((0))");
+
+                entity.Property(e => e.Status).HasDefaultValueSql("((1))");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.ProductImages)
+                    .HasForeignKey(d => d.ProductId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ProductImages_Products");
+            });
+
             modelBuilder.Entity<ProductInCategory>(entity =>
             {
                 entity.HasKey(e => new { e.ProductId, e.CategoryId });
@@ -169,14 +192,6 @@ namespace MyShop.Data.Entities
                 entity.Property(e => e.Description).HasColumnType("ntext");
 
                 entity.Property(e => e.Details).HasColumnType("ntext");
-
-                entity.Property(e => e.Image)
-                    .HasMaxLength(250)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ImageThumb)
-                    .HasMaxLength(250)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.Name).HasMaxLength(250);
 

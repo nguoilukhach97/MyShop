@@ -3,11 +3,12 @@ using MyShop.Application.PageViews;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MyShop.Application.Interfaces
 {
     public interface IPublicProductService
     {
-        PageResult<ProductViewModel> GetAllByCategoryId(GetProductPagingView request);
+        Task<PageResult<ProductViewModel>> GetAllByCategoryId(GetProductPagingView request);
     }
 }

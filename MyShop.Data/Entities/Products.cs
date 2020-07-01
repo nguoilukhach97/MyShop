@@ -8,6 +8,7 @@ namespace MyShop.Data.Entities
         public Products()
         {
             Evalutes = new HashSet<Evalutes>();
+            ProductImages = new HashSet<ProductImages>();
             ProductInCategory = new HashSet<ProductInCategory>();
             ProductInOrder = new HashSet<ProductInOrder>();
             ProductSize = new HashSet<ProductSize>();
@@ -21,8 +22,6 @@ namespace MyShop.Data.Entities
         public string Details { get; set; }
         public decimal Price { get; set; }
         public decimal PromotionPrice { get; set; }
-        public string Image { get; set; }
-        public string ImageThumb { get; set; }
         public int? Warranty { get; set; }
         public DateTime DateCreated { get; set; }
         public int UserCreated { get; set; }
@@ -33,6 +32,7 @@ namespace MyShop.Data.Entities
 
         public virtual Brands Brand { get; set; }
         public virtual ICollection<Evalutes> Evalutes { get; set; }
+        public virtual ICollection<ProductImages> ProductImages { get; set; }
         public virtual ICollection<ProductInCategory> ProductInCategory { get; set; }
         public virtual ICollection<ProductInOrder> ProductInOrder { get; set; }
         public virtual ICollection<ProductSize> ProductSize { get; set; }
